@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACO Ultimate</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+}
+
+header{
+padding:20px;
+background:#111827;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+}
+
+.hero{
+padding:40px 20px;
+text-align:center;
+}
+
+.hero h1{
+font-size:36px;
+margin-bottom:10px;
+}
+
+.hero p{
+opacity:.8;
+margin-bottom:20px;
+}
+
+input{
+width:90%;
+max-width:600px;
+padding:15px;
+border:none;
+border-radius:12px;
+}
+
+button{
+padding:15px 25px;
+border:none;
+border-radius:12px;
+margin-top:10px;
+background:#7c3aed;
+color:white;
+font-size:16px;
+}
+
+.result{
+margin:20px auto;
+width:90%;
+max-width:900px;
+background:#111827;
+padding:20px;
+border-radius:16px;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+<div class="logo">🌸 ACO Ultimate</div>
+</header>
+
+<section class="hero">
+<h1>One Keyword → Unlimited Content</h1>
+
+<p>Buat Story, Prompt Gambar, dan Prompt Video</p>
+
+<input id="keyword" placeholder="Contoh: Dragon Egg">
+
+<br>
+
+<button onclick="generate()">
+Generate
+</button>
+</section>
+
+<div class="result" id="result">
+
+Masukkan keyword lalu tekan Generate
+
+</div>
+
+<script>
+function generate(){
+
+const keyword =
+document.getElementById("keyword").value;
+
+document.getElementById("result").innerHTML = `
+<h2>${keyword}</h2>
+
+<br>
+
+<b>Story Idea:</b>
+<br>
+A mysterious discovery changes everything.
+
+<br><br>
+
+<b>Image Prompt:</b>
+<br>
+Ultra realistic ${keyword},
+cinematic lighting,
+8k masterpiece.
+
+<br><br>
+
+<b>Video Prompt:</b>
+<br>
+Camera slowly pushes forward,
+environmental motion,
+movie quality.
+`;
+
+}
+</script>
+
+</body>
+</html>
