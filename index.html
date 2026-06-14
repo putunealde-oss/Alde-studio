@@ -6,6 +6,7 @@
 <title>ACO Ultimate</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -16,124 +17,270 @@ font-family:Arial,sans-serif;
 body{
 background:#0f172a;
 color:white;
-}
-
-header{
-padding:20px;
-background:#111827;
 display:flex;
-justify-content:space-between;
-align-items:center;
 }
 
-.logo{
-font-size:24px;
-font-weight:bold;
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+height:100vh;
+width:250px;
+background:#111827;
+padding:20px;
+transition:.3s;
+z-index:1000;
 }
 
-.hero{
-padding:40px 20px;
-text-align:center;
+.sidebar.collapsed{
+width:70px;
 }
 
-.hero h1{
-font-size:36px;
-margin-bottom:10px;
-}
-
-.hero p{
-opacity:.8;
+.sidebar h2{
 margin-bottom:20px;
 }
 
+.menu div{
+padding:12px;
+margin-bottom:8px;
+background:#1f2937;
+border-radius:10px;
+}
+
+.main{
+flex:1;
+margin-left:250px;
+padding:20px;
+transition:.3s;
+}
+
+.main.full{
+margin-left:70px;
+}
+
+.toggle{
+background:#7c3aed;
+border:none;
+padding:10px 15px;
+border-radius:10px;
+color:white;
+cursor:pointer;
+margin-bottom:20px;
+}
+
+.hero{
+background:#111827;
+padding:25px;
+border-radius:20px;
+}
+
+.hero h1{
+margin-bottom:10px;
+}
+
 input{
-width:90%;
-max-width:600px;
+width:100%;
 padding:15px;
 border:none;
 border-radius:12px;
+margin-top:15px;
 }
 
-button{
-padding:15px 25px;
+button.generate{
+margin-top:15px;
+padding:15px 20px;
 border:none;
 border-radius:12px;
-margin-top:10px;
 background:#7c3aed;
 color:white;
-font-size:16px;
+cursor:pointer;
 }
 
-.result{
-margin:20px auto;
-width:90%;
-max-width:900px;
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.card{
 background:#111827;
 padding:20px;
 border-radius:16px;
 }
-</style>
 
+.tabs{
+display:flex;
+gap:10px;
+margin-top:20px;
+flex-wrap:wrap;
+}
+
+.tab{
+background:#1f2937;
+padding:10px 15px;
+border-radius:10px;
+}
+
+.output{
+background:#111827;
+margin-top:20px;
+padding:20px;
+border-radius:16px;
+}
+
+@media(max-width:768px){
+
+.sidebar{
+transform:translateX(-100%);
+}
+
+.sidebar.show{
+transform:translateX(0);
+}
+
+.main{
+margin-left:0;
+}
+
+}
+
+</style>
 </head>
 <body>
 
-<header>
-<div class="logo">🌸 ACO Ultimate</div>
-</header>
+<div class="sidebar" id="sidebar">
 
-<section class="hero">
-<h1>One Keyword → Unlimited Content</h1>
+<h2>🌸 ACO</h2>
 
-<p>Buat Story, Prompt Gambar, dan Prompt Video</p>
+<div class="menu">
+<div>🏠 Dashboard</div>
+<div>📁 Projects</div>
+<div>💡 Ideas</div>
+<div>📖 Story</div>
+<div>🎬 Video</div>
+<div>⚙ Settings</div>
+</div>
 
-<input id="keyword" placeholder="Contoh: Dragon Egg">
+</div>
 
-<br>
+<div class="main" id="main">
 
-<button onclick="generate()">
+<button class="toggle" onclick="toggleMenu()">
+☰
+</button>
+
+<div class="hero">
+
+<h1>ACO Ultimate</h1>
+
+<p>One Keyword → Unlimited Content</p>
+
+<input id="keyword" placeholder="Dragon Egg">
+
+<button class="generate" onclick="generate()">
 Generate
 </button>
-</section>
 
-<div class="result" id="result">
+</div>
 
-Masukkan keyword lalu tekan Generate
+<div class="cards">
+
+<div class="card">
+<h3>Viral Score</h3>
+<h1>97</h1>
+</div>
+
+<div class="card">
+<h3>Audience</h3>
+<h1>Global</h1>
+</div>
+
+<div class="card">
+<h3>Genre</h3>
+<h1>Fantasy</h1>
+</div>
+
+</div>
+
+<div class="tabs">
+<div class="tab">Story</div>
+<div class="tab">Image Prompt</div>
+<div class="tab">Video Prompt</div>
+</div>
+
+<div class="output" id="output">
+
+Masukkan keyword lalu Generate
+
+</div>
 
 </div>
 
 <script>
+
+function toggleMenu(){
+
+const sidebar =
+document.getElementById("sidebar");
+
+const main =
+document.getElementById("main");
+
+if(window.innerWidth < 768){
+
+sidebar.classList.toggle("show");
+
+}else{
+
+sidebar.classList.toggle("collapsed");
+main.classList.toggle("full");
+
+}
+
+}
+
 function generate(){
 
 const keyword =
 document.getElementById("keyword").value;
 
-document.getElementById("result").innerHTML = `
+document.getElementById("output").innerHTML = `
+
 <h2>${keyword}</h2>
 
 <br>
 
-<b>Story Idea:</b>
-<br>
+<b>Story</b>
+
+<p>
 A mysterious discovery changes everything.
+</p>
 
-<br><br>
-
-<b>Image Prompt:</b>
 <br>
+
+<b>Image Prompt</b>
+
+<p>
 Ultra realistic ${keyword},
 cinematic lighting,
 8k masterpiece.
+</p>
 
-<br><br>
-
-<b>Video Prompt:</b>
 <br>
+
+<b>Video Prompt</b>
+
+<p>
 Camera slowly pushes forward,
 environmental motion,
 movie quality.
+</p>
+
 `;
 
 }
+
 </script>
 
 </body>
